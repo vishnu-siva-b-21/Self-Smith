@@ -1,0 +1,130 @@
+.ongoing-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh
+  }
+
+  .content-wrapper {
+    background-color: #ecf7fc !important;
+  }
+
+  .progress {
+    background-color: #d8d8d8;
+    border-radius: 20px;
+    position: relative;
+    margin: 15px 0;
+    height: 30px;
+    width: 300px;
+
+  }
+
+  .progress-done {
+    box-shadow: 0 3px 3px -5px rgba(0, 0, 0, 0.3), 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    transition: 1s ease 0.3s;
+  }
+
+  .badge {
+    margin-top: 4vh;
+    margin-left: 2vh;
+  }
+
+  .badge-card>.card {
+    width: 60%;
+    min-width: 60%;
+  }
+
+  .remaining-row {
+    margin-top: 3vh;
+  }
+
+  .card-link {
+    text-decoration: none;
+    color: black;
+  }
+
+  .remaining-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+
+  .ongoing-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+
+  .no-ongoing{
+    font-size: 25px;
+    font-style: normal;
+    margin-bottom: 10vh;
+  }
+
+  .no-remaining{
+    font-size: 25px;
+    font-style: normal;
+    margin-top: 10vh;
+  }
+  @media (max-width: 1510px) {
+    .remaining-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 1510px) {
+    .ongoing-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .stretch-card {
+      margin-left: -4%;
+    }
+  }
+
+  @media (max-width:376px) {
+    .stretch-card {
+      margin-left: -1%;
+      width: 70% !important;
+    }
+
+    .card {
+      width: 95%;
+    }
+
+    .progress {
+      width: 70vw;
+      margin: 5px 0;
+      margin-left: -3vh;
+    }
+
+    .start-quiz {
+      width: 70vw;
+      margin: 5px 0;
+      margin-left: -3vh;
+    }
+  }
+
+  @media (max-width: 325px) {
+    .stretch-card {
+      margin-left: -5% !important;
+    }
+  }

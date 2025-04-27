@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% block title %}
+    {% endblock %}</title>
+
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.4.47/css/materialdesignicons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/@icon/themify-icons@1.0.1-alpha.3/themify-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='faculty/styles/base.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='faculty/images/logo.png') }}" sizes="512x512"
+    type="image/x-icon">
+
+  <style>
+    /* Navbar, Sidebar Background */
+    .navbar,
+    .navbar-brand-wrapper,
+    .sidebar {
+      background-color: #fafafa !important;
+      -webkit-transition: -webkit-transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      /* Dark Slate Gray */
+    }
+
+
+    .navbar,
+    .navbar-brand-wrapper,
+    .sidebar {
+      box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-body {
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+      -webkit-transition: -webkit-transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Sidebar Icons */
+    .sidebar .nav .nav-item .nav-link i.menu-icon {
+      color: #120e0e;
+      /* White */
+    }
+
+    /* Sidebar Menu Title */
+    .sidebar .nav .nav-item .nav-link .menu-title {
+      color: #000000;
+
+      /* White */
+    }
+
+    /* Page Background */
+    .page-body-wrapper,
+    .content-wrapper {
+      background-color: #F0F0F0;
+      /* Light Gray */
+    }
+
+    /* Inner Content Background */
+    .inner-content-top,
+    .content {
+      background-color: #FFF5EE !important;
+      /* Seashell */
+    }
+
+    /* Hover Effect for Sidebar Links */
+    .sidebar .nav .nav-item .nav-link:hover .menu-title,
+    .sidebar .nav .nav-item .nav-link:hover i.menu-icon {
+      color: #0f1414;
+      font-weight: bold;
+      /* Dark Slate Gray */
+    }
+
+    /* Active Link Style */
+    .sidebar .nav .nav-item.active>.nav-link .menu-title,
+    .sidebar .nav .nav-item.active>.nav-link i.menu-icon {
+      color: #000000;
+      /* Dark Slate Gray */
+    }
+
+    .sidebar .nav .nav-item.active {
+      background-color: #fa889b;
+      color: black;
+
+      /* Thistle */
+    }
+
+    .nav-item.active .nav-link {
+      font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+      .brand-logo-mini {
+        width: 100% !important;
+      }
+    }
+  </style>
+  {% block styles %}
+  {% endblock %}
+
+
+</head>
+
+<body>
+  <div class="container-scroller">
+
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+        <a class="navbar-brand brand-logo" href="/faculty/dashboard" style="color: #fa889b;"><b>Archarios Akademikos</b></a>
+        <a class="navbar-brand brand-logo-mini" href="#"><img class="project-logo"
+            src="{{ url_for('static', filename='faculty/images/logo.png') }}" alt="logo"
+            style="width: auto;padding-left: 1.25rem; margin-left: -2vh; transform: scale(2.5);" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="mdi mdi-menu"></span>
+        </button>
+
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="nav-profile-img">
+                <img src="{{ image }}" alt="image" style="width: 45px; height: 45px; margin-top: -1vh;">
+              </div>
+              <div class="nav-profile-text">
+                <p class="mb-1 text" style="color: black;">{{user_data.faculty_username.title()}}</p>
+              </div>
+            </a>
+            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="{{url_for('faculty.faculty_profile')}}">
+                <i class="mdi mdi-account-circle me-2 text-success"></i> Profile </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{url_for('main.user_logout')}}">
+                <i class="mdi mdi-logout me-2 text-primary"></i> Logout </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('faculty.faculty_dashboard')}}">
+              <span class="menu-title">DASHBOARD</span>
+              <i class="mdi mdi-access-point menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('faculty.review_levels')}}">
+              <span class="menu-title">REVIEW LEVELS</span>
+              <i class="mdi mdi-signal menu-icon"></i>
+            </a>
+          </li>
+
+
+        </ul>
+      </nav>
+      {% block content %}
+      {% endblock %}
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{url_for('static', filename='faculty/scripts/bundle.base.js')}}"></script>
+  <script src="{{url_for('static', filename='faculty/scripts/base.js')}}"></script>
+
+
+  {% block scripts %}
+  {% endblock %}
+
+  <script>
+    document.querySelectorAll('.card').forEach(card => {
+      const level = parseInt(card.getAttribute('data-level')); // Get the level from the data attribute
+      let gradientClass = '';
+
+      // Determine the gradient class based on the level
+      switch (level) {
+        case 1:
+          gradientClass = 'bg-gradient-info';
+          break;
+        case 2:
+          gradientClass = 'bg-gradient-success';
+          break;
+        case 3:
+          gradientClass = 'bg-gradient-warning';
+          break;
+        case 4:
+          gradientClass = 'bg-gradient-danger';
+          break;
+        default:
+          gradientClass = 'bg-gradient-secondary'; // Default fallback
+      }
+
+      // Apply the gradient class to the card
+      card.classList.add(gradientClass);
+
+      // Set the same gradient for the progress bar
+      const progress = card.querySelector('.progress-done');
+      if (progress) {
+        let done = progress.getAttribute('data-done');
+        progress.style.width = done + '%';
+        progress.style.opacity = 1;
+
+        // Add gradient as background
+        progress.style.background = getComputedStyle(card).backgroundImage;
+      }
+    });
+
+  </script>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <script>
+    Swal.fire({
+      icon: '{{ category }}',
+      title: '{{ message }}',
+      showConfirmButton: false,
+      timer: 3000
+    });
+  </script>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</body>
+
+</html>

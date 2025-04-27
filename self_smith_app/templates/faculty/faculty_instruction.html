@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruction</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='faculty/styles/faculty_instruction.css')}}">
+</head>
+
+<body>
+    <div id="card">
+        <div id="blur">
+            <div id="color"></div>
+        </div>
+        <div id="profile">
+            <!-- Your existing content -->
+            <p class="head">Welcome to Archarios Akademikos! Your Guide to Starting out in the World
+                of Technical Education as a Novel Academician.</p>
+
+            <div class="table-container">
+                <table class="question-table">
+                    <thead>
+                        <tr>
+                            <th>Number of Questions</th>
+                            <th>Total Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{nos_ques}}</td>
+                            <td>{{tot_marks}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Note: "The Animations are on by default. If you don't want, keep them off in the Exam page."</p>
+            
+
+<p>
+Read the Instructions Carefully! </p>
+            <div class="info" onclick="toggleInfo()">
+                <i class="fa fa-info fa-1x block"></i>
+                <i class="fa fa-angle-down fa-2x block"></i>
+                <div class="info-content">
+                    <p>The game consists of questions carefully designed to help induct you as an academician in a
+                        technical education course. The objective of the game is to learn. Not winning or losing.
+                        Each question in the quiz is of a multiple-choice format. Read each question carefully, and
+                        click on the button next to your response. The questions are curated according to the level of
+                        difficulty and there are 4 levels.</p>
+                    <p>The content of each level is of 6 categories: Innovative Pedagogies, Student Psychology,
+                        Communication Skills, Course & Programme Outcome, Ethics & Values and Research Culture. Each
+                        correct or incorrect response will result in appropriate feedback immediately at the bottom of
+                        the screen.
+                    </p>
+                    <p>After responding to a question, click on the "Next Question" button at the bottom to go to the
+                        next question. After responding to the last question, click on "Close" on the top of the window
+                        to exit the quiz.
+                    </p>
+
+                    <p>
+                        <button type="button" class="start" onclick="confirmStartGame('{{ level }}')">Start</button>
+
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script src="{{ url_for('static', filename='faculty/scripts/faculty_instruction.js') }}"></script>
+</body>
+
+</html>

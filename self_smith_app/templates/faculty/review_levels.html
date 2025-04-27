@@ -1,0 +1,106 @@
+{% extends "faculty/base.html" %}
+
+{% block title %}
+Faculty - Review
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='faculty/styles/review_levels.css')}}">
+
+{% endblock %}
+
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    {% if serialized_completed_levels %}
+    <div class="row">
+      <div class="page-header">
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-signal"></i>
+          </span> REVIEW LEVELS
+        </h3>
+
+      </div>
+      {% for level in serialized_completed_levels | sort %}
+      <div class="col-md-4 stretch-card grid-margin">
+        <a href="{{ url_for('faculty.user_review', level=level.level) }}" class="card-link quiz-link">
+          <div class="card card-img-holder text-white" data-level="{{ level.level }}">
+            <div class="card-body">
+              <img src="{{ url_for('static', filename='faculty/images/circle.svg') }}" class="card-img-absolute"
+                alt="circle-image" />
+              <h4 class="font-weight-normal mb-3">LEVEL {{ level.level }}
+                <i class="mdi mdi-chart-line mdi-24px float-end"></i>
+              </h4>
+              <div class="progress">
+                <div class="progress-done" data-done="100">
+                  <b>100%</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <h1 class="no-review">You haven't completed any levels yet.</h1>
+    {% endif %}
+
+
+    {% if user_data.badges %}
+    <div class="row">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-seal"></i>
+        </span> OBTAINED BADGES
+      </h3>
+
+      {% set badge_counts = {} %}
+      {% for badge in user_data.badges %}
+        {% if badge.name in badge_counts %}
+          {% set _ = badge_counts.update({badge.name: badge_counts[badge.name] + 1}) %}
+        {% else %}
+          {% set _ = badge_counts.update({badge.name: 1}) %}
+        {% endif %}
+      {% endfor %}
+      
+      <div class="badge" id="badgeBox">
+        {% for badge_name, count in badge_counts.items() %}
+          {% set badge = user_data.badges | selectattr('name', 'equalto', badge_name) | list | first %}
+          <div class="col-md-4 badge-card grid-margin">
+            <div class="card bg-gradient-warning card-img-holder text-white">
+              <div class="card-body badge-clickable"
+                data-badge-image="{{ badge.badge_image }}"
+                data-badge-name="{{ badge.name }}"
+                data-cat-gif="{{ url_for('static', filename='faculty/images/nyan-cat.gif') }}">
+                <img src="{{ badge.badge_image }}" class="img-badge"
+                  alt="badge-img" style="width: 50px; height: 50px;">
+                <img src="{{ url_for('static', filename='faculty/images/circle.svg') }}" class="card-img-absolute"
+                  alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">
+                  {{ badge.name }}
+                  <!-- {{count}} -->
+                  <i class="mdi mdi-numeric-{{ count }}-box mdi-24px float-end"></i>
+                </h4>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      
+
+
+    </div>
+    {% else %}
+    <!-- <h1 class="no-badges">No Badges Earned</h1> -->
+    <a href="/faculty/dashboard">
+      <button type="button" class="badge-button">Click to Earn Badges</button>
+    </a>
+    {% endif %}
+
+  </div>
+
+  <script src="{{ url_for('static', filename='faculty/scripts/review_levels.js') }}"></script>
+
+  {% endblock %}

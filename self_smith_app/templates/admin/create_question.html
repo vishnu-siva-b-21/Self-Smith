@@ -1,0 +1,211 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Admin - Create Question
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='admin/styles/create_question.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<section id="content">
+    <div class="container mt-3">
+        <br>
+        <div class="inner-content">
+            <ul class="nav nav-tabs">
+
+                <li class="nav-item">
+                    <a class="nav-link active  nav-top" data-toggle="tab" href="#default">CHOOSE ONE</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="default" class="container tab-pane active"><br>
+                    <div class="inner-choose">
+                        <div class="choose-content">
+                            <div class="dropdowns">
+                                <label for="lesson">Chapter:</label>
+                                <div class="inputs">
+                                    <select id="lesson" class="dropdown-lesson">
+                                        <option disabled selected>Select Chapter</option>
+                                        <option value="l1">Innovative Pedagogies</option>
+                                        <option value="l2">Student Psychology</option>
+                                        <option value="l3">Communication Skills</option>
+                                        <option value="l4">Course and Programme Outcome</option>
+                                        <option value="l5">Research Culture</option>
+                                        <option value="l6">Ethics & Values</option>
+                                    </select>
+                                    <span class="error-message" id="lesson-error">Please select a lesson</span>
+                                </div>
+                                <label for="ease-level">Level:</label>
+                                <div class="inputs">
+                                    <select id="ease-level" class="dropdown-ease-level">
+                                        <option disabled selected>Select Level</option>
+                                        <option value="1" {% if level=='1' %} selected {% endif %}>Level 1
+                                        </option>
+                                        <option value="2" {% if level=='2' %} selected {% endif %}>Level 2
+                                        </option>
+                                        <option value="3" {% if level=='3' %} selected {% endif %}>Level 3
+                                        </option>
+                                        <option value="4" {% if level=='4' %} selected {% endif %}>Level 4
+                                        </option>
+                                    </select>
+                                    <span class="error-message" id="ease-level-error">Please select a level</span>
+                                </div>
+                            </div>
+
+                            <h2>Question</h2>
+                            <div class="start">
+                                <div class="inputs">
+                                    <input type="text" class="question question2" placeholder="Type your Question">
+                                    <span class="error-message" id="question-error">Please enter a question</span>
+                                </div>
+                                <div class="inputs">
+                                    <input type="number" class="max-marks" placeholder="Max Marks"
+                                        style="margin-left: 20px;">
+                                    <span class="error-message" id="marks-error">Please enter the max marks</span>
+                                </div>
+                            </div>
+
+                            <div class="pair">
+                                <input type="radio" name="option" class="checkbox">
+                                <div class="inputs">
+                                    <input type="text" class="answer" placeholder="Option Text">
+                                    <span class="error-message" id="option-text-error">Please fill out this
+                                        option</span>
+                                </div>
+                                <div class="inputs">
+                                    <input type="number" class="option-marks" placeholder="Marks"
+                                        style="margin-left: 10px;">
+                                    <span class="error-message" id="option-marks-error">Please enter marks for this
+                                        option</span>
+                                </div>
+
+                                <form class="delete-form" action="#">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn text-light del" data-toggle="modal">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Additional pairs will be added here dynamically -->
+                            <div class="pair">
+                                <input type="radio" name="option" class="checkbox">
+                                <div class="inputs">
+                                    <input type="text" class="answer" placeholder="Option Text">
+                                    <span class="error-message" id="option-text-error">Please fill out this
+                                        option</span>
+                                </div>
+                                <div class="inputs">
+                                    <input type="number" class="option-marks" placeholder="Marks"
+                                        style="margin-left: 10px;">
+                                    <span class="error-message" id="option-marks-error">Please enter marks for this
+                                        option</span>
+                                </div>
+
+                                <form class="delete-form" action="#">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn text-light del" data-toggle="modal">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="pair">
+                                <input type="radio" name="option" class="checkbox">
+                                <div class="inputs">
+                                    <input type="text" class="answer" placeholder="Option Text">
+                                    <span class="error-message" id="option-text-error">Please fill out this
+                                        option</span>
+                                </div>
+                                <div class="inputs">
+                                    <input type="number" class="option-marks" placeholder="Marks"
+                                        style="margin-left: 10px;">
+                                    <span class="error-message" id="option-marks-error">Please enter marks for this
+                                        option</span>
+                                </div>
+
+                                <form class="delete-form" action="#">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn text-light del" data-toggle="modal">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="pair">
+                                <input type="radio" name="option" class="checkbox">
+                                <div class="inputs">
+                                    <input type="text" class="answer" placeholder="Option Text">
+                                    <span class="error-message" id="option-text-error">Please fill out this
+                                        option</span>
+                                </div>
+                                <div class="inputs">
+                                    <input type="number" class="option-marks" placeholder="Marks"
+                                        style="margin-left: 10px;">
+                                    <span class="error-message" id="option-marks-error">Please enter marks for this
+                                        option</span>
+                                </div>
+
+                                <form class="delete-form" action="#">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn text-light del" data-toggle="modal">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="mcq-button">
+                            <p onclick="addChooseOption()">Add Another Option</p>
+                            <button type="button" class="mcq-add" onclick="sendChoose()">Add
+                                <span>Question</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <form class="form-container" method="POST" action="/admin/get-csv-store-faculty" enctype="multipart/form-data">
+        <div class="upload-files-container">
+            <div class="drag-file-area">
+                <span class="material-icons-outlined upload-icon"> file_upload </span>
+                <h3 class="dynamic-message"> Drag & drop any file here </h3>
+                <label class="label"> or <span class="browse-files">
+                        <input style="display: none;" type="file" class="default-file-input" name="file" />
+                        <span class="browse-files-text">browse file</span> <span>from device</span>
+                    </span>
+                </label>
+            </div>
+            <span class="cannot-upload-message">
+                <span class="material-icons-outlined">error</span> Please select a file first
+                <span class="material-icons-outlined cancel-alert-button">cancel</span>
+            </span>
+            <div class="file-block">
+                <div class="file-info">
+                    <span class="material-icons-outlined file-icon">description</span>
+                    <span class="file-name"> </span> | <span class="file-size"> </span>
+                </div>
+                <span class="material-icons remove-file-icon">delete</span>
+                <div class="progress-bar"> </div>
+            </div>
+            <button type="button" class="upload-button"> Upload </button>
+            <a class="btn btn-outline-danger" href="{{url_for('static', filename='admin/docs/ques_model.csv')}}"
+                download>Model
+                File</a>
+        </div>
+    </form>
+
+</section>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{url_for('static', filename='admin/scripts/create_question.js')}}"></script>
+{% endblock %}

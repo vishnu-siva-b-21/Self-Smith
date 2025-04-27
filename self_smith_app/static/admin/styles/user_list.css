@@ -1,0 +1,543 @@
+@import url("https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined");
+
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+.content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Apply these styles when the page has fully loaded */
+.content.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-container {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-files-container {
+  background-color: #ffffff;
+  padding: 15px 15px;
+  margin: 10px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 20px, rgba(0, 0, 0, 0.28) 0px 6px 6px;
+}
+
+.drag-file-area {
+  border: 2px dashed #0e387a;
+  border-radius: 40px;
+  padding: 30px 50px;
+  text-align: center;
+  background-color: #ced9ed;
+}
+
+.drag-file-area .upload-icon {
+  font-size: 50px;
+}
+
+.drag-file-area h3 {
+  font-size: 26px;
+  margin: 15px 0;
+}
+
+.drag-file-area label {
+  font-size: 19px;
+}
+
+.drag-file-area label .browse-files-text {
+  color: #0e387a;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.browse-files span {
+  position: relative;
+}
+
+.cannot-upload-message {
+  background-color: #ffc6c4;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  padding: 5px 10px 5px 30px;
+  border-radius: 5px;
+  color: #bb0000;
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.cannot-upload-message span,
+.upload-button-icon {
+  padding-right: 10px;
+}
+
+.cannot-upload-message span:last-child {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.file-block {
+  color: #bdc9df;
+  background-color: #0e387a;
+  transition: all 1s;
+  width: 426px;
+  position: relative;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 15px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.file-icon {
+  margin-right: 10px;
+}
+
+.file-name,
+.file-size {
+  padding: 0 3px;
+}
+
+.remove-file-icon {
+  cursor: pointer;
+}
+
+.progress-bar {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 4.5%;
+  width: 0;
+  height: 5px;
+  border-radius: 25px;
+  background-color: #4bb543;
+}
+
+.upload-button {
+  font-family: "Montserrat";
+  background-color: #0e387a;
+  color: #f7fff7;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 7.5px 50px;
+  cursor: pointer;
+}
+
+.content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.content.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bottom-row {
+  display: flex;
+  flex-direction: row;
+  padding: 6vh;
+  height: 5vh;
+  margin-top: -2vh;
+}
+
+.upper-row {
+  width: 95%;
+  margin-left: 5vh;
+  margin-top: 5vh;
+}
+
+.head {
+  margin-top: 5vh;
+  margin-left: 7vh;
+  color: #0e387a;
+  font-weight: 500;
+}
+
+.password {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 4vh;
+}
+
+label {
+  font-weight: 600;
+}
+
+.password input {
+  margin-right: 10px;
+}
+
+.password i {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.tick-icon,
+.wrong-icon {
+  display: none;
+}
+
+.tick-icon {
+  color: green;
+}
+
+.wrong-icon {
+  color: red;
+  margin-right: 3vh !important;
+}
+
+input {
+  margin-left: 2vh;
+}
+
+.edit-icon {
+  margin-left: 4vh !important;
+  margin-right: 3vh !important;
+}
+body {
+  overflow-x: hidden;
+  background-color: #bdc9df;
+  font-family: "Wix Madefor Display", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  box-sizing: border-box;
+  color: black;
+}
+.card {
+  word-wrap: break-word;
+}
+.navbar {
+  background-color: #0e387a;
+}
+
+.navbar a {
+  font-weight: 700;
+}
+
+.content h1 {
+  color: #0e387a;
+  margin-top: 5vh;
+  margin-left: 10%;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5vh;
+}
+
+.inner-box1 {
+  width: 80%;
+  min-height: 25vh;
+  height: auto;
+  margin-left: 9% !important;
+  margin-top: 5vh !important  ;
+  background-color: #ffffff;
+  padding: 15px 15px;
+  padding-left: 30px;
+  margin: 10px;
+  border-radius: 40px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 20px, rgba(0, 0, 0, 0.28) 0px 6px 6px;
+}
+
+.inner-content {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3vh;
+  margin-bottom: -2vh;
+}
+
+.circle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  font-size: 24px;
+  position: relative;
+  margin-left: 40vh;
+}
+
+svg {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  z-index: 0; /* Ensure the SVG is behind the text */
+}
+
+circle {
+  fill: rgb(230, 230, 230);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease-in-out, stroke 0.5s ease-in-out;
+}
+
+.percentage-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: Inter;
+  z-index: 1; /* Ensure the text is above the SVG */
+  pointer-events: none; /* Ensure the text does not interfere with any click events on the SVG */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navbar i {
+  color: black;
+  font-size: 25px;
+  margin-right: 2vh;
+}
+
+.navbar a {
+  font-weight: 700;
+}
+
+.btn-group {
+  margin-left: 99%;
+  margin-top: -30vh;
+  background-color: #ee4b2b;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
+
+.btn-group i {
+  font-size: 35px;
+  border-radius: 100%;
+}
+
+.view-btn {
+  margin-left: 99%;
+  background-color: green;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  margin-top: -10vh;
+}
+
+.view-btn i {
+  margin-left: 0.5vh;
+  font-size: 35px;
+  border-radius: 100%;
+}
+
+.inner-content .left {
+  width: 50% !important;
+}
+.content .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.add-user {
+  margin-top: 6vh;
+  margin-right: 22vh;
+}
+
+.add,
+.add-admin {
+  height: 5vh;
+  border-radius: 5px;
+  border-style: none;
+  font-size: 20px;
+  background-color: green;
+  color: white;
+}
+
+.delete-selected {
+  height: auto;
+  min-height: 5vh;
+  border-radius: 5px;
+  border-style: none;
+  font-size: 20px;
+  background-color: red;
+  color: white;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.error-border {
+  border: 1px solid red !important;
+}
+
+@media (max-width: 1300px) {
+  .inner-box1 h2 {
+    font-size: 24px;
+  }
+  .circle-container {
+    margin-left: 30vh;
+  }
+}
+
+@media (max-width: 1000px) {
+  .inner-box1 h2 {
+    font-size: 20px;
+  }
+  .add-user {
+    margin-right: 15vh;
+  }
+  .inner-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 800px) {
+  .inner-box1 {
+    height: auto;
+    min-height: 45vh;
+  }
+
+  .btn-group {
+    margin-top: -35vh;
+    margin-left: 97%;
+  }
+  .view-btn {
+    margin-top: -35vh;
+    margin-left: 97%;
+  }
+  .circle-container {
+    margin-left: 15%;
+  }
+
+  .content h1 {
+    font-size: 25px;
+  }
+  .add-user {
+    margin-right: 10vh;
+  }
+  .right {
+    margin-top: 4vh;
+  }
+  .btn-group {
+    margin-top: -55vh;
+  }
+  .view-btn {
+    margin-top: -15vh;
+  }
+  .circle-container {
+    margin-bottom: 3vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn-group {
+    width: 50px;
+    height: 50px;
+  }
+  .btn-group i {
+    font-size: 25px;
+  }
+  .view-btn {
+    width: 50px;
+    height: 50px;
+  }
+  .view-btn i {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 450px) {
+  .inner-box1 {
+    height: auto;
+  }
+  .inner-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .content h1 {
+    font-size: 20px;
+  }
+  .add {
+    font-size: 15px;
+  }
+  .delete-selected {
+    font-size: 15px;
+  }
+  .inner-box1 h2 {
+    font-size: 15px;
+  }
+}
+
+.nothing {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+/* Add these CSS animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s linear;
+}
+
+.fadeOut {
+  animation: fadeOut 1s linear;
+}

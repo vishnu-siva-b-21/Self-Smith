@@ -1,0 +1,86 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Admin - {{ faculty_details.faculty_name.title() }} Response Page
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='admin/styles/user_response.css')}}">
+{% endblock %}
+{% block content %}
+<div class="head">
+    <h1>Show Review</h1>
+
+    <div class="details">
+        <div class="box">
+            <div class="inner-box1">
+                <div class="inner-content-top">
+                    <div class="left">
+                        <h2>NAME : <strong> Hemakumar L</strong></h2>
+                        <h2>LEVEL : <strong> 3 </strong></h2>
+                        <h2>CORRECT ANSWERED : <strong> 5 </strong></h2>
+                        <h2>WRONG ANSWERED : <strong> 2 </strong></h2>
+                    </div>
+                    <div class="right">
+                        <div class="circle-container" id="circle">
+                            <svg width="200" height="200">
+                                <circle cx="100" cy="100" r="60" stroke="#f0f0f0" />
+                            </svg>
+                            <div class="percentage-text">
+                                30%
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+
+        <div class="box-content">
+            <h2>Level - {{level}}</h2>
+            {% if choose_ques %}
+            {% for choose in choose_ques %}
+            <div class="inner-content">
+                <h4>Lesson Name : <b>{{choose.lesson}}</b></h4>
+                <div class="inner-flex">
+                    <div class="left-content">
+                        <h4>User Answer:</h4>
+                        <h5>{{choose.question}}</h5>
+                        {% for option in choose.options %}
+                        {% if option.ques == choose.correct_option %}
+                        <input type="radio" class="radio" checked disabled>
+                        {% else %}
+                        <input type="radio" class="radio" disabled>
+                        {% endif %}
+                        <label>{{option.ques}}</label><br>
+                        {% endfor %}
+                    </div>
+                    <div class="right-content">
+                        <h4>Correct Answer:</h4>
+                        <h5>{{choose.question}}</h5>
+                        {% for option in choose.options %}
+                        {% if option.ques == choose.correct_option %}
+                        <input type="radio" class="radio" checked disabled>
+                        {% else %}
+                        <input type="radio" class="radio" disabled>
+                        {% endif %}
+                        <label>{{option.ques}}</label><br>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+  
+<script src="{{url_for('static', filename='admin/scripts/user_response.js')}}"></script>
+
+{% endblock %}

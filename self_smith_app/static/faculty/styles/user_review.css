@@ -1,0 +1,286 @@
+body {
+  background-color: #FBE7C6;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.inner-content-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 2vh;
+  margin-bottom: -4vh;
+  border-radius: 10px !important;
+  height: 30vh;
+  width: 93%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 20px, rgba(0, 0, 0, 0.28) 0px 6px 6px;
+  margin-left: 10vh;
+  margin-top: 5vh;
+}
+
+.inner-content-top .left {
+  margin-top: 4vh;
+  margin-left: 3vh;
+}
+
+.circle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  font-size: 24px;
+  position: relative;
+  margin-left: 40vh;
+
+}
+
+
+svg {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  z-index: 0;
+  /* Ensure the SVG is behind the text */
+}
+
+circle {
+  fill: rgb(230, 230, 230);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease-in-out, stroke 0.5s ease-in-out;
+}
+
+.percentage-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.0em;
+  font-weight: 600;
+  font-family: Inter;
+  z-index: 1;
+  /* Ensure the text is above the SVG */
+  pointer-events: none;
+  /* Ensure the text does not interfere with any click events on the SVG */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inner-flex {
+  margin-bottom: 3vh;
+}
+
+@media (max-width:1200px) {
+  .inner-content-top {
+      width: 90%;
+  }
+
+  .inner-content-top h2 {
+      font-size: 20px;
+  }
+
+  .circle-container {
+      margin-top: -3vh !important;
+  }
+
+  .inner-content {
+      width: 100% !important;
+      margin-left: -2vh;
+  }
+
+}
+
+@media (max-width:900px) {
+  .content {
+      width: 90% !important;
+  }
+
+  .inner-content-top .left {
+      width: 30vw !important;
+  }
+}
+
+@media (max-width:700px) {
+  .inner-content-top {
+      display: flex;
+      flex-direction: column;
+      min-height: 50vh;
+      height: auto;
+  }
+
+  .inner-content-top .left {
+      margin-left: 30%;
+      width: 40vw !important;
+  }
+
+  .inner-content-top .right {
+      margin-left: -14vh;
+  }
+
+  .box-content h2 {
+      font-size: 25px;
+  }
+
+  .inner-flex h4 {
+      font-size: 13px;
+  }
+
+  .inner-content label {
+      font-size: 12px;
+  }
+
+  .inner-flex {
+      margin-bottom: 3vh;
+  }
+}
+
+@media (max-width:550px) {
+  .head h1 {
+      font-size: 25px;
+      font-weight: bold;
+  }
+
+  .inner-content-top {
+      width: 95%;
+      margin-left: 7%;
+  }
+
+  .inner-content-top .left {
+      margin-left: 20%;
+      width: 50vw !important;
+  }
+
+  .inner-content-top .right {
+      margin-left: -25vh;
+  }
+
+  .content {
+      margin-left: 7%;
+      width: 97% !important;
+  }
+
+  .inner-content {
+      width: 130% !important;
+      margin-left: -7vh;
+  }
+
+}
+
+@media (max-width:426px) {
+
+  .inner-content-top {
+      width: 90% !important;
+      margin-left: 8%;
+  }
+
+  .inner-content-top .left h2 {
+      font-size: 18px !important;
+  }
+
+  .inner-content-top .right {
+      margin-left: -30vh;
+  }
+
+  .content {
+      width: 90% !important;
+      margin-left: 8%;
+  }
+
+  .inner-flex {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .inner-content .left-content,
+  .right-content {
+      width: 60vw;
+      margin-left: -3vh;
+      margin-bottom: 2vh;
+  }
+
+  .inner-content {
+      width: 140% !important;
+  }
+}
+
+@media (max-width:325px) {
+  .inner-content-top .left {
+      margin-left: 10%;
+      width: 80vw !important;
+  }
+
+  .inner-content-top .right {
+      margin-left: -35vh !important;
+  }
+
+  .inner-content {
+      width: 150% !important;
+  }
+
+  .left-content,
+  .right-content {
+      position: relative;
+      left: 2vh;
+  }
+
+  .inner-content-top,
+  .content {
+      margin-left: 6%;
+  }
+}
+
+body {
+  background-color: #f2edf3;
+}
+
+h1 {
+  margin-top: 5vh;
+  margin-left: 5vh;
+}
+
+.content {
+  width: 70vw !important;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 20px, rgba(0, 0, 0, 0.28) 0px 6px 6px;
+  min-height: 40vh;
+  height: auto;
+  margin-left: 10vh;
+  margin-top: 10vh;
+  border-radius: 10px;
+  padding: 10vh;
+}
+
+.inner-content {
+  width: 90% !important;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 20px, rgba(0, 0, 0, 0.28) 0px 6px 6px;
+  min-height: 25vh;
+  margin-left: 7vh;
+  padding: 5vh;
+  margin-top: 3vh;
+}
+
+.inner-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-content,
+.right-content {
+  width: 90%;
+  background-color: #f2edf3;
+  margin-left: 2vh;
+  padding: 3vh;
+  border-radius: 10px;
+}
+
+input,
+h4 {
+  margin-top: 2vh;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='faculty/styles/game.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <div id="info-btn" class="info" onclick="toggleInfo()">
+        <i class="fa fa-info fa-1x block" style="width: min-content;"></i>
+    </div>
+    <div class="popup" style="display: none;">
+        <div class="popup-title">Animation</div>
+    
+        <label class="btn-onoff">
+            <input type="checkbox" name="name" data-onoff="toggle" checked>
+            <span></span>
+        </label>
+        
+    </div>
+    
+    <div id="exit-game" class="floating-btn">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Exit
+    </div>
+
+    <div class="progress-container-main" id="progress-container">
+        <div class="progress-bar-main">
+            <div class="progress-fill-main"></div>
+        </div>
+        <div class="progress-info-main" id="progress-info-main"></div>
+    </div>
+
+
+    <h1 id="level">{{level}}</h1>
+    <div class="coverflow">
+        <div id="confetti"></div>
+        <div class="best-answer-animation">
+            <h2>You Chose the Best Answer!</h2>
+        </div>
+        <audio id="whoosh-sound" src="{{url_for('static', filename='faculty/audio/5330-Swoosh-twice.wav')}}"
+            preload="auto"></audio>
+        <audio id="candle-blow" src="{{url_for('static', filename='faculty/audio/Candle Blow.wav')}}"
+            preload="auto"></audio>
+        <audio id="better-luck" src="{{url_for('static', filename='faculty/audio/Better Luck.mp3')}}"
+            preload="auto"></audio>
+        <audio id="Party-pop" src="{{url_for('static', filename='faculty/audio/TruePartyPop.mp3')}}"
+            preload="auto"></audio>
+        <audio id="cheer-aud" src="{{url_for('static', filename='faculty/audio/Cheer-Aud.mp3')}}"
+            preload="auto"></audio>
+    </div>
+    <div style="display: none;" class="wrapper">
+        <div class="candles">
+            <div class="light__wave"></div>
+            <div class="candle1">
+                <div class="candle1__body">
+                    <div class="candle1__eyes">
+                        <span class="candle1__eyes-one"></span>
+                        <span class="candle1__eyes-two"></span>
+                    </div>
+                    <div class="candle1__mouth"></div>
+                </div>
+                <div class="candle1__stick"></div>
+            </div>
+
+            <div class="candle2">
+                <div class="candle2__body">
+                    <div class="candle2__eyes">
+                        <div class="candle2__eyes-one"></div>
+                        <div class="candle2__eyes-two"></div>
+                    </div>
+                </div>
+                <div class="candle2__stick"></div>
+            </div>
+            <div class="candle2__fire"></div>
+            <div class="sparkles-one"></div>
+            <div class="sparkles-two"></div>
+            <div class="candle__smoke-one">
+
+            </div>
+
+            <div class="candle__smoke-two">
+
+            </div>
+
+        </div>
+        <div class="floor">
+        </div>
+    </div>
+
+    </div>
+    <div class="better-luck-animation">
+        <h1>Better Luck Next Time!</h1>
+    </div>
+
+    <div class="cards" id="congrats-card">
+        <h1>Congratulations!</h1>
+        <h2 style="margin-bottom: 10vh;">You have successfully completed the Level</h2>
+
+
+        <h2 class="score" style="margin-bottom: 8vh;">Your Score:</h2>
+        <div class="stars">
+            <span class="fa fa-star unchecked" id="star1"></span>
+            <span class="fa fa-star unchecked" id="star2"></span>
+            <span class="fa fa-star unchecked" id="star3"></span>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped" id="progressBar" role="progressbar" aria-valuenow="0"
+                aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="badges-container">
+            <button class="badge" id="badge">View the Badges earned</button>
+        </div>
+        <!-- <div id="exit-game-congrats" class="floating-btn2">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Exit
+        </div> -->
+    </div>
+
+    <span id="value" style="display:none">100</span>
+<script>
+
+let infoClicked = false; // To track if the info icon has been clicked
+
+// function toggleInfo() {
+//     const popup = document.querySelector('.popup');
+//     const toggle = document.querySelector('.btn-onoff input[data-onoff="toggle"]');
+
+//     // Function to hide the popup
+//     const hidePopup = (event) => {
+//         if (!popup.contains(event.target) && !event.target.closest('.info')) {
+//             popup.style.display = 'none'; // Hide the popup
+//             infoClicked = false; // Reset the clicked status
+//             document.removeEventListener('click', hidePopup); // Remove listener
+//         }
+//     };
+
+//     // Toggle the popup visibility
+//     if (infoClicked) {
+//         popup.style.display = 'none'; // Hide the popup
+//         document.removeEventListener('click', hidePopup); // Remove listener
+//     } else {
+//         popup.style.display = 'block'; // Show the popup
+//         document.addEventListener('click', hidePopup); // Add listener to detect clicks outside
+//     }
+
+//     infoClicked = !infoClicked; // Flip the clicked status
+
+//     // Add listener for toggle switch
+//     toggle.addEventListener('change', function () {
+//         const toggleState = this.checked ? "on" : "off"; // Determine current state
+//         updateToggleStatus(toggleState); // Update the URL parameter dynamically
+//         console.log(`Animations are now ${toggleState.toUpperCase()}`);
+
+//         if (toggleState === "off") {
+//             disableFunctions(); // Disable animations or related functions
+//         }
+//     });
+// }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ url_for('static', filename='faculty/scripts/game.js') }}"></script>
+</body>
+
+</html>

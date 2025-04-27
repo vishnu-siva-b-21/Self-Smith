@@ -1,0 +1,164 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Admin - User List
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='admin/styles/user_list.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    
+    {% if users %}
+    <div class="header">
+        <h1>USERS AND THE MARKS OBTAINED</h1>
+
+        <div class="add-user">
+            <button type="button" class="add">+User</button>
+            <button type="button" class="delete-selected" disabled id="delete-selected">
+                Delete Selected
+            </button>
+        </div>
+        
+
+        <div class="bulk-actions">
+
+        </div>
+    </div>
+    <form id="bulk-delete-form" method="POST" action="{{ url_for('admin.delete_many_faculty') }}">
+        <input type="hidden" name="user_ids" id="user-ids">
+        <div class="box">
+            {% for user in users %}
+            <div class="inner-box1">
+                <div class="inner-content">
+                    <div class="left">
+                        <input type="checkbox" class="select-user" style="width: 20px; height: 20px;" data-id="{{ user.id }}">
+                        <h2>FACULTY ID : <small>{{ user.id }}</small></h2>
+                        <h2>NAME : <small>{{ user.faculty_username.title() }}</small></h2>
+                        <h2>EMAIL : <small>{{ user.email }}</small></h2>
+                        <h2>DEPARTMENT : <small>{{ user.faculty_dept }}</small></h2>
+                        
+                    </div>
+                </div>
+            </form>
+                <form class="delete-form" action="{{ url_for('admin.delete_faculty', id=user.id) }}" method="POST">
+                    <div class="btn-group">
+                        <button type="submit" class="btn text-light del" data-toggle="modal">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+    </form>
+    {% else %}
+    <div class="nothing">
+        <h1>No User Created</h1>
+    </div>
+    {% endif %}
+
+
+    <form class="form-container" method="POST" action="/admin/get-csv-store-faculty" enctype="multipart/form-data">
+        <div class="upload-files-container">
+            <div class="drag-file-area">
+                <span class="material-icons-outlined upload-icon"> file_upload </span>
+                <h3 class="dynamic-message"> Drag & drop any file here </h3>
+                <label class="label"> or <span class="browse-files">
+                        <input style="display: none;" type="file" class="default-file-input" name="file" />
+
+                        <span class="browse-files-text">browse file</span> <span>from device</span>
+
+                    </span>
+                </label>
+            </div>
+            <span class="cannot-upload-message">
+                <span class="material-icons-outlined">error</span> Please select a file first
+                <span class="material-icons-outlined cancel-alert-button">cancel</span>
+            </span>
+            <div class="file-block">
+                <div class="file-info">
+                    <span class="material-icons-outlined file-icon">description</span>
+                    <span class="file-name"> </span> | <span class="file-size"> </span>
+                </div>
+                <span class="material-icons remove-file-icon">delete</span>
+                <div class="progress-bar"> </div>
+            </div>
+            <button type="button" class="upload-button"> Upload </button>
+            <a class="btn btn-outline-danger" href="{{url_for('static', filename='admin/docs/user_model.csv')}}"
+                download>Model
+                File</a>
+        </div>
+    </form>
+    {% if admins %}
+    <div class="header">
+        <h1>ADMINS LIST</h1>
+
+        <div class="add-user">
+            <button type="button" class="add-admin">+Admin</button>
+        </div>
+    </div>
+    <div class="box">
+        {% for admin in admins %}
+        <div class="inner-box1">
+            <div class="inner-content">
+                <div class="left">
+                    <h2>ADMIN ID : <small> {{admin.id}}</small></h2>
+                    <h2>EMAIL : <small> {{admin.email}}</small></h2>
+                </div>
+
+            </div>
+            <form class="delete-form" action="{{url_for('admin.delete_admin', id=admin.id)}}" method="POST">
+                <div class="btn-group">
+                    <button type="submit" class="btn text-light del" data-toggle="modal">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="nothing">
+        <h1>No Admin Created</h1>
+        <div class="add-admin" style="margin-right: 0;">
+            <button type="button" class="add">Create here</button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('.select-user');
+        const deleteSelectedButton = document.getElementById('delete-selected');
+        const userIdsInput = document.getElementById('user-ids');
+
+        const updateSelectedUsers = () => {
+            const selectedIds = Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-id'));
+
+            userIdsInput.value = JSON.stringify(selectedIds);
+            deleteSelectedButton.disabled = selectedIds.length === 0;
+        };
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSelectedUsers);
+        });
+
+        deleteSelectedButton.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete the selected users?')) {
+                document.getElementById('bulk-delete-form').submit();
+            }
+        });
+    });
+</script>
+<script src="{{url_for('static', filename='admin/scripts/user_list.js')}}"></script>
+{% endblock %}

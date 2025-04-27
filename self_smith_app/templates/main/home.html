@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main/styles/home.css')}}">
+    <link rel="icon" href="{{ url_for('static', filename='faculty/images/logo.png') }}" sizes="512x512"
+        type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        Sending the Mail...
+    </div>
+    <div class="page-content">
+        <div class="content">
+            <div class="form-right">
+                <div class="tab">
+                    <div class="tab-inner">
+                        <button class="tablinks" id="signInTab">Sign In</button>
+                    </div>
+                </div>
+                <form class="form-detail" id="sign-in-form" action="{{url_for('main.user_login')}}" method="POST">
+                    <div class="tabcontent" id="sign-in">
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <select name="role" id="role-signin" class="input-field">
+                                    <option value="" disabled selected>Your Role </option>
+                                    <option value="admin" {% if user_role=="admin" %}selected{% endif %}>Admin</option>
+                                    <option value="faculty" {% if user_role=="faculty" %}selected{% endif %}>Faculty
+                                    </option>
+                                </select>
+                                <span class="border"></span>
+                            </label>
+                            <div class="error-message" id="role-signin-error"></div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="email" name="email" id="your_email_signin" class="input-field"
+                                    placeholder="E-Mail" value="{{ user_login_email }}">
+                                <span class="border"></span>
+                            </label>
+                            <div class="error-message" id="email-signin-error"></div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-row-inner">
+                                <input type="password" name="password" id="password_signin" class="input-field"
+                                    placeholder="Password">
+                                <span class="border"></span>
+                                <span class="toggle-password" id="toggle-password-signin">
+                                    <i class="fa fa-eye" id="eye-icon"></i>
+                                </span>
+                            </label>
+                            <div class="error-message" id="password-signin-error"></div>
+                            <a style="cursor:pointer;" id="forgot-password" class="forgot-password"
+                                onclick="showForgotPasswordPopup()">Forgot
+                                Password?</a>
+                        </div>
+
+
+                        <div class="form-row remember-me-container">
+                            <label for="remember-me">
+                                <input type="checkbox" id="remember-me" name="remember_me">
+                                Remember Me
+                            </label>
+                        </div>
+
+                        <div class="form-row-last">
+                            <input type="submit" name="register" class="submit-button" value="Sign In">
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{url_for('static', filename='main/scripts/home.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <script>
+        Swal.fire({
+            icon: '{{ category }}',
+            title: '{{ message }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</body>
+
+</html>

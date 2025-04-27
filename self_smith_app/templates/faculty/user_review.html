@@ -1,0 +1,114 @@
+{% extends "faculty/base.html" %}
+
+{% block title %}
+Faculty - Show Questions
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='faculty/styles/user_review.css')}}">
+
+{% endblock %}
+
+{% block content %}
+<div class="head">
+    <h1>Show Review</h1>
+
+    <div class="details">
+        <div class="box">
+            <div class="inner-box1">
+                <div class="inner-content-top">
+                    <div class="left">
+                        <h2>Name: <strong> {{user_data.faculty_username}}</strong></h2>
+                        <h2>Level: <strong> {{level}} </strong></h2>
+                        <h2>Total No of Questions: <strong> {{ serialized_user_level_response['responses'] | length }}
+                            </strong></h2>
+
+                        </h2>
+                    </div>
+                    <div class="right">
+                        <div class="circle-container" id="circle">
+                            <svg width="200" height="200">
+                                <circle cx="100" cy="100" r="60" stroke="#f0f0f0" />
+                            </svg>
+                            <div class="percentage-text">
+                                {{progress}}%
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="box-content">
+            <h2>Level - {{ level }}</h2>
+            {% if all_level_ques %}
+            {% for choose in all_level_ques %}
+            <div class="inner-content">
+                <h4>Lesson Name : <b>{{ choose.lesson }}</b></h4>
+                <h5>Question: <b>{{ choose.question }}</b></h5>
+                <div class="inner-flex">
+                    <div class="left-content">
+                        <h4>User Answer:</h4>
+
+                        {% set user_response = serialized_user_level_response['responses'] | selectattr('question_id',
+                        'equalto', choose.id|string) | list %}
+                        {% if user_response %}
+                        {% set user_answer = user_response[0]['user_answer'] %}
+                        {% else %}
+                        {% set user_answer = None %}
+                        {% endif %}
+
+                        <!-- Debugging the user answer -->
+                        <p style="display: none;">User Answer: {{ user_answer }}</p>
+
+                        {% for option in choose.options %}
+                        {% if option.ques == user_answer %}
+                        <input type="radio" class="radio" checked disabled>
+                        <label><b>{{ option.ques }}</b></label><br>
+                        {% else %}
+                        <input type="radio" class="radio" disabled>
+                        <label>{{ option.ques }}</label><br>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="right-content">
+                        <h4>Correct Answer:</h4>
+                        {% for option in choose.options %}
+                        {% if option.ques == choose.correct_option %}
+                        <input type="radio" class="radio" checked disabled>
+                        <label><b>{{ option.ques }}</b></label><br>
+                        {% else %}
+                        <input type="radio" class="radio" disabled>
+                        <label>{{ option.ques }}</label><br>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Display Correct/Incorrect status -->
+                <div class="status">
+                    <h5>User Mark: <strong>{{ user_response[0].user_question_mark }}</strong></h5>
+                    <h5>Max Mark: <strong> {{choose.max_marks}}</strong></h5>
+                    {% if user_answer == choose.correct_option %}
+                    <h5 style="color: green;">Correct</h5>
+                    {% else %}
+                    <h5 style="color: red;">Incorrect</h5>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<script src="{{ url_for('static', filename='faculty/scripts/user_review.js') }}"></script>
+
+{% endblock %}

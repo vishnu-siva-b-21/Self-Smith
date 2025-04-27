@@ -1,0 +1,252 @@
+body, html {
+  height: 100%;
+  overflow: hidden;
+}
+ .error {
+            border: 2px solid crimson !important;
+        }
+
+        .error-message {
+            color: crimson;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+
+        .toggle-password i {
+            font-size: 18px;
+        }
+        .loading-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(#3E64D3, #4505e7);
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .platform-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .platform-row i {
+            margin-right: 10px;
+        }
+
+        .checkbox {
+            cursor: pointer;
+        }
+
+body {
+  margin: 0;
+  font-family: "Source Sans Pro", sans-serif;
+  background: linear-gradient(-225deg, #2cd8d5 0%, #c5c1ff 56%, #ffbac3 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #fff;
+}
+.page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.content {
+  background: #fff;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  box-sizing: border-box;
+  color: #3d5983;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.form-right {
+  width: 100%;
+}
+
+.tab {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tab .tab-inner {
+  display: inline-block;
+}
+
+.tab .tablinks {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #3d5983;
+  font-size: 22px;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.tab .tablinks.active {
+  color: #3d5983;
+}
+
+.tab .tablinks:hover {
+  color: #ffeba7;
+}
+
+.tabcontent {
+  display: none;
+}
+
+.tabcontent .form-row {
+  margin: 20px 0;
+  position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.tabcontent .form-row-inner {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.tabcontent .form-row-inner label {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tabcontent .form-row-inner i {
+  margin-right: 10px;
+}
+
+.tabcontent .form-row-inner .input-field {
+  width: 100% !important;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #3d5983;
+  color: #3d5983;
+  font-size: 16px;
+  padding: 5px 0;
+  outline: none;
+  padding-left: 1vh;
+}
+
+.tabcontent .form-row-inner .input-field::placeholder {
+  color: #3d5983;
+}
+
+.tabcontent .form-row-inner .input-field:focus {
+  border-bottom-color: #ffeba7;
+}
+
+.tabcontent .form-row-inner .input-field:hover {
+  border-bottom-color: #ffeba7;
+}
+
+.tabcontent .form-row-inner .error {
+  border-bottom-color: crimson;
+}
+
+.tabcontent .form-row-inner .error-message {
+  margin-top: 5px;
+  color: crimson;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.form-row-last {
+  text-align: center;
+}
+
+.form-row-last input {
+  background: #ffeba7;
+  border: none;
+  padding: 10px 20px;
+  color: #3d5983;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.form-row-last input:hover {
+  background: #3d5983;
+  color: #ffeba7;
+}
+.forgot-password {
+  font-size: 14px;
+  color: #3d5983;
+  text-decoration: none;
+  font-weight: 600;
+  display: none;
+  position: absolute;
+  right: 40px;
+  bottom: -25px; 
+}
+
+.forgot-password:hover {
+  color: #f9d356;
+}
+.remember-me-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: auto; 
+  height: auto;
+}
+
+
+.remember-me-container input[type="checkbox"] {
+  margin-right: 10px; 
+   
+}
+
+.remember-me-container label {
+  font-size: 16px;
+  color: #3d5983; 
+  cursor:pointer ;
+  
+}
+
+.remember-me-container {
+  margin-bottom: 20px;
+}
+
+
+@media (max-width:500px){
+  .content{
+    width: 90%;
+  }
+}

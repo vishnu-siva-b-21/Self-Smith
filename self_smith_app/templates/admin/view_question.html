@@ -1,0 +1,163 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Admin - All Questions
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='admin/styles/view_question.css')}}">
+
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="header">
+        <h1 class="question-page">
+            QUESTIONS PAGE
+        </h1>
+
+        <form id="level-form" action="{{ url_for('admin.view_question') }}" method="GET">
+            <label for="level-select">Select Level:</label>
+            <select style="padding: 8px;
+                           font-size: 16px;
+                           border: 1px solid #ccc;
+                           border-radius: 4px;
+                           background-color: #d9dbdd;
+                           transition: border-color 0.3s;" id="level-select" name="level"
+                onchange="handleLevelChange(this)">
+                <option value="" disabled {% if not selected_level %} selected {% endif %}>Select Level</option>
+                <option value="1" {% if selected_level=='1' %} selected {% endif %}>Level 1</option>
+                <option value="2" {% if selected_level=='2' %} selected {% endif %}>Level 2</option>
+                <option value="3" {% if selected_level=='3' %} selected {% endif %}>Level 3</option>
+                <option value="4" {% if selected_level=='4' %} selected {% endif %}>Level 4</option>
+            </select>
+        </form>
+    </div>
+    <div class="box">
+
+
+        {% if choose_ques %}
+        <div class="inner-box inner-box1">
+            {% for choose in choose_ques %}
+            {% if choose.level == selected_level %}
+            <div class="inner-box1 inner-box2" id="question-{{ choose.id }}">
+                
+
+                <div class="dropdowns">
+                    <div>
+                        <label for="lesson-{{ choose.id }}">Chapter:</label>
+                        <select id="lesson-{{ choose.id }}" class="dropdown-lesson" disabled>
+                            <option value="l1" {% if choose.lesson=='l1' %} selected {% endif %}>Innovative Pedagogies
+                            </option>
+                            <option value="l2" {% if choose.lesson=='l2' %} selected {% endif %}>Student Psychology
+                            </option>
+                            <option value="l3" {% if choose.lesson=='l3' %} selected {% endif %}>Communication Skills
+                            </option>
+                            <option value="l4" {% if choose.lesson=='l4' %} selected {% endif %}>Course and Programme
+                                Outcome
+                            </option>
+                            <option value="l5" {% if choose.lesson=='l5' %} selected {% endif %}>Research Culture
+                            </option>
+                            <option value="l6" {% if choose.lesson=='l6' %} selected {% endif %}>Ethics & Values
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="ease-level-{{ choose.id }}">Level:</label>
+                        <select id="ease-level-{{ choose.id }}" class="dropdown-ease-level" disabled>
+                            <option value="1" {% if choose.level=='1' %} selected {% endif %}>Level 1</option>
+                            <option value="2" {% if choose.level=='2' %} selected {% endif %}>Level 2</option>
+                            <option value="3" {% if choose.level=='3' %} selected {% endif %}>Level 3</option>
+                            <option value="4" {% if choose.level=='4' %} selected {% endif %}>Level 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="align-items: flex-start;" class="question-block">
+                    <label style="margin: 15px 0;" for="question-text-{{ choose.id }}">Question:</label>
+                    <textarea rows="1" id="question-text-{{ choose.id }}" readonly>{{ choose.question }}</textarea>
+
+                    <label style="margin: 15px ;" for="max-marks-{{ choose.id }}" class="marks-label">Marks:</label>
+                    <input type="number" value="{{ choose.max_marks }}" id="max-marks-{{ choose.id }}" readonly>
+                </div>
+
+                {% for option in choose.options %}
+                <div class="option-block">
+                    <input type="radio" name="option-{{ choose.id }}" {% if option.ques==choose.correct_option %}
+                        checked {% endif %} disabled>
+                    <textarea rows="1" id="option-text-{{ option.id }}" readonly>{{ option.ques }}</textarea>
+                    <input type="number" class="option-marks" value="{{ option.marks }}"
+                        id="option-marks-{{ option.id }}" readonly>
+                    <i id="correct-icon-{{ option.id }}" class="" style="display:none; color: green;"></i>
+                    <i id="wrong-icon-{{ option.id }}" class="" style="display:none; color: red;"></i>
+                </div>
+                {% endfor %}
+
+                <form class="delete-form" action="{{ url_for('admin.delete_ques', id=choose.id) }}" method="POST">
+                    <div class="btn-group">
+                        <button type="submit" class="btn text-light del" data-toggle="modal">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </div>
+                </form>
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="btn-group1" data-question-id="{{ choose.id }}">
+                        <button type="button" class="btn text-light edit" onclick="editQuestion(this)">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button type="button" class="btn text-light save" onclick="saveQuestion(this)"
+                            style="display:none;">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                        <button type="button" class="btn text-light cancel" onclick="cancelEdit(this)"
+                            style="display:none;">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                        <div style="padding-top: 1vh;" class="error-message hidden"></div>
+                    </div>
+                    <div data-question-id="{{ choose.id }}">
+                        <button type="button" id="badge-{{ choose.id }}" class="btn text-light"
+                            onclick="openBadgeAlert(this)">
+                            {% if choose.badge %}
+                            Incentive
+                        {% else %}
+                            Add Incentive
+                        {% endif %}
+                        </button>
+                        <!-- Hidden elements to store badge data -->
+                        {% if choose.badge %}
+                        <div id="badge-data-{{ choose.id }}" style="display: none;">
+                            <img src="{{choose.badge.badge_image}}" id="badge-image-hidden-{{ choose.id }}" />
+                            <h1 id="badge-name-hidden-{{ choose.id }}">{{choose.badge.name}}</h1>
+                        </div>
+                        
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+
+        {% if not mcq_ques and not para_ques and not rating_ques and not choose_ques %}
+        <div class="nothing">
+            <h1>Nothing Created</h1>
+            <a href="{{ url_for('admin.create_question', level=selected_level) }}"><button class="nothing-btn">Create
+                    here</button></a>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='admin/scripts/view_question.js') }}"></script>
+{% endblock %}

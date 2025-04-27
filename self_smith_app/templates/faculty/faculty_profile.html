@@ -1,0 +1,53 @@
+{% extends "faculty/base.html" %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='faculty/styles/faculty_profile.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <div class="container profile-container">
+        <div class="profile-header">
+            <div class="profile-img">
+                <img class="main-profile-image" src="{{image}}">
+            </div>
+            <div class="profile-info">
+                <h2 id="display-username">{{user_data.faculty_username.title()}}</h2>
+                <p id="display-email">{{user_data.email}}</p>
+            </div>
+        </div>
+        <form class="profile-form" action="{{url_for('faculty.update_profile', file=user_data.faculty_profile_image)}}"
+            method="POST" enctype="multipart/form-data">
+            <h3>Account Info
+                <hr>
+            </h3>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="{{user_data.faculty_username}}">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="{{user_data.email}}">
+
+            <label for="dept">Dept</label>
+            <input type="text" name="dept" id="dept" value="{{user_data.faculty_dept}}">
+
+            <label for="profile-pic">Update Profile Picture</label>
+            <input type="file" name="profile_pic" id="profile-pic">
+
+            <button type="submit">Update</button>
+            <button type="button" id="change-password-btn">Change Password</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ url_for('static', filename='faculty/scripts/faculty_profile.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "faculty/base.html" %}
+
+{% block title %}
+Faculty - Dashboard
+{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='faculty/styles/faculty_dashboard.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+
+    {% if serialized_ongoing_levels %}
+    <div class="row1">
+      <div class="page-header">
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-signal"></i>
+          </span> ONGOING LEVELS
+        </h3>
+      </div>
+      <div class="ongoing-row">
+        {% for level in serialized_ongoing_levels | sort %}
+        <div class="col-md-4 stretch-card grid-margin">
+          <a href="{{ url_for('faculty.faculty_game', level=level.level, status='ongoing') }}"
+            class="card-link quiz-link">
+            <div class="card card-img-holder text-white" data-level="{{ level.level }}">
+              <div class="card-body">
+                <img src="{{ url_for('static', filename='faculty/images/circle.svg') }}" class="card-img-absolute"
+                  alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">LEVEL {{ level.level }}
+                  <i class="mdi mdi-diamond mdi-24px float-end"></i>
+                </h4>
+                <div class="progress">
+                  <div class="progress-done" data-done="{{ level.progress }}">
+                    <b>{{ level.progress }}%</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        {% for level in serialized_completed_levels %}
+        <div class="col-md-4 stretch-card grid-margin">
+          <a href="{{ url_for('faculty.user_review', level=level.level) }}" class="card-link quiz-link">
+            <div class="card card-img-holder text-white" data-level="{{ level.level }}">
+              <div class="card-body">
+                <img src="{{ url_for('static', filename='faculty/images/circle.svg') }}" class="card-img-absolute"
+                  alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">LEVEL {{ level.level }}
+                  <i class="mdi mdi-chart-line mdi-24px float-end"></i>
+                </h4>
+                <div class="progress">
+                  <div class="progress-done" data-done="100">
+                    <b>100%</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <!-- <h1 class="no-ongoing">You haven't started any levels</h1> -->
+    {% endif %}
+
+    {% if not_started_levels_list %}
+    <div class="row1">
+      <div class="page-header">
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-signal"></i>
+          </span> START THE QUIZ
+        </h3>
+      </div>
+      <div class="remaining-row">
+        {% for level in not_started_levels_list | sort %}
+        <div class="col-md-4 stretch-card grid-margin">
+          <a href="{{url_for('faculty.faculty_instruction', level=level)}}" class="card-link quiz-link">
+            <div class="card card-img-holder text-white" data-level="{{ level }}">
+              <div class="card-body">
+                <img src="{{ url_for('static', filename='faculty/images/circle.svg') }}" class="card-img-absolute"
+                  alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">LEVEL {{ level }}
+                  <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
+                </h4>
+                <div class="progress">
+                  <div class="progress-done" data-done="0">
+                    <b>0%</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <h1 class="no-remaining">You have successfully completed all the Quizzes!</h1>
+    {% endif %}
+
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='faculty/scripts/faculty_dashboard.js') }}"></script>
+{% endblock %}
