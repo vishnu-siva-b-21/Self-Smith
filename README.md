@@ -86,7 +86,7 @@ To use MongoDB, install the **MongoDB Community Server** from the [official Mong
 After installation, start the MongoDB server locally on default port 27017.
 
 ### 4. Configure Mail Settings (Optional for Local Testing)
-If you're running locally without a .env file, update default values in config.py:
+If you're running locally without a .env file, update default values in [config.py](self_smith_app/config.py):
 ``` python
 MAIL_SERVER = os.getenv("MAIL_SERVER", "smtp.gmail.com")
 MAIL_USERNAME = os.getenv("MAIL_USERNAME", "your_email@gmail.com")
