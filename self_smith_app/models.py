@@ -26,7 +26,9 @@ class Admin(Document, UserMixin):
 
     email = EmailField(required=True, unique=True)
     password = StringField(required=True, min_length=4)
-    default_user_password = StringField(required=True, min_length=4, default="sist2025")
+    default_user_password = StringField(
+        required=True, min_length=4, default="default_password"
+    )
 
     def get_id(self):
         return str(self.id)

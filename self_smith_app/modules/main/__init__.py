@@ -103,7 +103,15 @@ def user_reset_request():
         email = data.get("email")
         user = Faculty.objects(email=email).first()
         if user:
-            send_mail(user, user.get_reset_token())
+            try:
+                send_mail(user, user.get_reset_token())
+            except Exception as e:
+                return (
+                    jsonify(
+                        {"error": "Failed to send email, Need to setup Mail in config"}
+                    ),
+                    500,
+                )
             return (
                 jsonify(
                     {

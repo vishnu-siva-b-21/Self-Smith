@@ -15,6 +15,19 @@ login_manager.login_view = "main.user_login"
 login_manager.login_message_category = "info"
 
 
+def add_admin():
+    from self_smith_app.models import Admin
+
+    existing_user = Admin.objects(email="admin@gmail.com").first()
+    if existing_user is None:
+        hashed_password = bcrypt.generate_password_hash("admin").decode("utf-8")
+        admin = Admin(
+            email="admin@gmail.com",
+            password=hashed_password,
+        )
+        admin.save()
+
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -40,5 +53,7 @@ def create_app():
     app.register_blueprint(faculty, url_prefix="/faculty")
     app.register_blueprint(admin, url_prefix="/admin")
     app.register_blueprint(errors)
+
+    add_admin()
 
     return app
