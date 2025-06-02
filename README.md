@@ -99,6 +99,19 @@ MAIL_USE_SSL = os.getenv("MAIL_USE_SSL", "False") == "True"
 
 ### 5. Run the Flask Application
 
+If you're running the project **locally**, make sure to:
+
+- ✅ **Uncomment** the following line in `app.py`:
+  ```python
+  app.run(debug=1)
+  ```
+- ❌ Comment out the production deployment line:
+  ```python
+  # serve(app, host="0.0.0.0", port=8000)
+  ```
+
+Then, run the Flask app using:
+
 ```bash
 python app.py
 ```
