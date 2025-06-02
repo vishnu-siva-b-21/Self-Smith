@@ -43,7 +43,7 @@
 
 ## 🌐 Live Demo
 
-🔗 **Try it here**: [Self-Smith](https://sponza-v1-ri0t.onrender.com/)  
+🔗 **Try it here**: [Self-Smith](https://self-smith.onrender.com/)  
 _(Runs best on modern browsers and desktop view.)_
 
 ---
