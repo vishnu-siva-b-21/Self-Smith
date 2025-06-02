@@ -97,7 +97,7 @@ MAIL_USE_SSL = os.getenv("MAIL_USE_SSL", "False") == "True"
 ```
  - ⚠️ Use an App Password if you're using Gmail with 2FA enabled.
 
-### 5. Run the Flask Application
+### 4. Run the Flask Application
 
 If you're running the project **locally**, make sure to:
 
