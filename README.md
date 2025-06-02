@@ -159,7 +159,7 @@ Share it with others who might benefit — educators, developers, or students!
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).  
+This project is licensed under the [MIT License](LICENSE.md).  
 Feel free to use, modify, and distribute for both personal and commercial purposes.
 
 ---
