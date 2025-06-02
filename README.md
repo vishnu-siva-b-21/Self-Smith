@@ -85,7 +85,19 @@ pip install -r requirements.txt
 To use MongoDB, install the **MongoDB Community Server** from the [official MongoDB website](https://www.mongodb.com/try/download/community).  
 After installation, start the MongoDB server locally on default port 27017.
 
-### 4. Run the Flask Application
+### 4. Configure Mail Settings (Optional for Local Testing)
+If you're running locally without a .env file, update default values in config.py:
+``` python
+MAIL_SERVER = os.getenv("MAIL_SERVER", "smtp.gmail.com")
+MAIL_USERNAME = os.getenv("MAIL_USERNAME", "your_email@gmail.com")
+MAIL_PASSWORD = os.getenv("MAIL_PASSWORD", "your_app_password")
+MAIL_PORT = int(os.getenv("MAIL_PORT", 587))
+MAIL_USE_TLS = os.getenv("MAIL_USE_TLS", "True") == "True"
+MAIL_USE_SSL = os.getenv("MAIL_USE_SSL", "False") == "True"
+```
+ - ⚠️ Use an App Password if you're using Gmail with 2FA enabled.
+
+### 5. Run the Flask Application
 
 ```bash
 python app.py
